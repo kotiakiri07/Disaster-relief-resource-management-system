@@ -1,0 +1,165 @@
+/* ---------- Colours and base ---------- */
+:root {
+  --bg: #f4f6f9;
+  --card: #ffffff;
+  --ink: #1f2937;
+  --muted: #6b7280;
+  --brand: #0f766e;
+  --brand-dark: #0b5a54;
+  --line: #e5e7eb;
+  --critical: #dc2626;
+  --high: #ea580c;
+  --medium: #ca8a04;
+  --low: #16a34a;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* ---------- Header and tabs ---------- */
+.top {
+  background: var(--brand);
+  color: #fff;
+  padding: 18px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.top h1 { margin: 0; font-size: 1.6rem; }
+.top p { margin: 2px 0 0; opacity: .85; font-size: .9rem; }
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  padding: 10px 28px 0;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+}
+.tab {
+  background: none;
+  color: var(--muted);
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 10px 16px;
+  border-radius: 0;
+  white-space: nowrap;
+}
+.tab.active { color: var(--brand); border-bottom-color: var(--brand); font-weight: 600; }
+
+/* ---------- Layout ---------- */
+main { max-width: 1200px; margin: 0 auto; padding: 22px 20px 60px; }
+.panel { display: none; }           /* only the active tab is shown */
+.panel.active { display: block; }
+
+.box {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 18px;
+  margin-bottom: 18px;
+}
+.box h2 { margin: 0 0 12px; font-size: 1.05rem; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
+.row-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
+
+/* ---------- Dashboard cards ---------- */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin-bottom: 18px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px; border-left: 5px solid var(--brand); }
+.card .num { font-size: 1.8rem; font-weight: 700; }
+.card .lbl { color: var(--muted); font-size: .85rem; }
+
+/* ---------- Forms and buttons ---------- */
+.form { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; align-items: end; }
+.form .wide { grid-column: span 2; }
+label { display: flex; flex-direction: column; font-size: .82rem; color: var(--muted); gap: 4px; }
+input, select {
+  padding: 9px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: .95rem;
+  color: var(--ink);
+  background: #fff;
+}
+input:focus, select:focus { outline: 2px solid #99d5cf; border-color: var(--brand); }
+
+button {
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  padding: 9px 14px;
+  border-radius: 6px;
+  font-size: .9rem;
+  cursor: pointer;
+}
+button:hover { background: var(--brand-dark); }
+button.ghost { background: rgba(255,255,255,.15); }
+button.ghost:hover { background: rgba(255,255,255,.28); }
+button.small { padding: 5px 9px; font-size: .78rem; margin: 1px; }
+button.danger { background: #b91c1c; }
+button.danger:hover { background: #991b1b; }
+.tab:hover { background: none; color: var(--brand); }
+
+/* ---------- Tables ---------- */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+th, td { text-align: left; padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+th { color: var(--muted); font-weight: 600; font-size: .78rem; text-transform: uppercase; letter-spacing: .03em; }
+.empty { color: var(--muted); padding: 14px 4px; }
+
+/* ---------- Badges (priority, status, severity) ---------- */
+.badge { display: inline-block; padding: 2px 9px; border-radius: 99px; font-size: .75rem; color: #fff; font-weight: 600; }
+.b-Critical { background: var(--critical); }
+.b-High { background: var(--high); }
+.b-Medium { background: var(--medium); }
+.b-Low { background: var(--low); }
+.s-Pending { background: #64748b; }
+.s-Partially { background: #0284c7; }
+.s-Allocated { background: #7c3aed; }
+.s-Delivered { background: var(--low); }
+.s-Available { background: var(--low); }
+.s-Assigned { background: #0284c7; }
+.sev-Severe { background: var(--critical); }
+.sev-Moderate { background: var(--high); }
+.sev-Mild { background: var(--medium); }
+
+/* ---------- Bars, lists, progress ---------- */
+.bar-row { display: flex; align-items: center; gap: 10px; margin: 8px 0; font-size: .88rem; }
+.bar-row .name { width: 130px; }
+.bar { flex: 1; background: #eef2f7; border-radius: 6px; height: 14px; overflow: hidden; }
+.bar > span { display: block; height: 100%; background: var(--brand); }
+.bar > span.low { background: var(--critical); }
+.bar-row .val { width: 28px; text-align: right; color: var(--muted); }
+
+/* ---------- Available stock rows on the dashboard ---------- */
+.stock-row { display: grid; grid-template-columns: 130px 1fr 120px 130px; align-items: center; gap: 10px; margin: 10px 0; font-size: .9rem; }
+.stock-val { font-weight: 600; text-align: right; }
+.stock-need { color: var(--muted); font-size: .8rem; }
+
+ul.plain { list-style: none; margin: 0; padding: 0; }
+ul.plain li { padding: 8px 0; border-bottom: 1px solid var(--line); font-size: .9rem; }
+.progress { background: #eef2f7; height: 8px; border-radius: 6px; width: 90px; overflow: hidden; margin-top: 3px; }
+.progress > span { display: block; height: 100%; background: var(--brand); }
+
+/* ---------- Toast message ---------- */
+.toast {
+  position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(30px);
+  background: #111827; color: #fff; padding: 10px 18px; border-radius: 8px;
+  opacity: 0; transition: .25s; pointer-events: none; font-size: .9rem; z-index: 10;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ---------- Phones ---------- */
+@media (max-width: 600px) {
+  .form .wide { grid-column: span 1; }
+  .top { padding: 14px 16px; }
+  .tabs { padding: 8px 12px 0; }
+  .stock-row { grid-template-columns: 1fr auto; }
+  .stock-row .bar { grid-column: 1 / -1; order: 3; }
+  .stock-need { grid-column: 1 / -1; order: 4; }
+}

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReliefHub– Disaster Relief Resource Coordination</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <h1>ReliefHub</h1>
+      <p>Disaster relief resource-coordination platform</p>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="dashboard">Dashboard</button>
+    <button class="tab" data-tab="requests">Relief Requests</button>
+    <button class="tab" data-tab="inventory">Resource Inventory</button>
+    <button class="tab" data-tab="areas">Affected Areas</button>
+    <button class="tab" data-tab="volunteers">Volunteers</button>
+  </nav>
+
+  <main>
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="panel active">
+      <div class="cards" id="statCards"></div>
+      <div class="box">
+        <h2>Available stock</h2>
+        <div id="stockList"></div>
+      </div>
+      <div class="grid2">
+        <div class="box">
+          <h2>Requests by priority</h2>
+          <div id="priorityBars"></div>
+        </div>
+        <div class="box">
+          <h2>Requests by status</h2>
+          <div id="statusBars"></div>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="box">
+          <h2>Low-stock alerts</h2>
+          <ul id="alerts" class="plain"></ul>
+        </div>
+        <div class="box">
+          <h2>Most urgent open requests</h2>
+          <div id="urgentList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RELIEF REQUESTS -->
+    <section id="requests" class="panel">
+      <div class="box">
+        <h2>New relief request</h2>
+        <form id="requestForm" class="form">
+          <label>Affected area <select id="reqArea" required></select></label>
+          <label>Resource needed <input id="reqResource" list="resourceList" placeholder="e.g. Water" required></label>
+          <datalist id="resourceList"></datalist>
+          <label>Quantity <input id="reqQty" type="number" min="1" required></label>
+          <label>Priority
+            <select id="reqPriority">
+              <option>Critical</option><option>High</option><option selected>Medium</option><option>Low</option>
+            </select>
+          </label>
+          <label class="wide">Notes / contact <input id="reqNotes" placeholder="Contact person, phone, details"></label>
+          <button type="submit">Add request</button>
+        </form>
+      </div>
+      <div class="box">
+        <div class="row-between">
+          <h2>All requests</h2>
+          <div>
+            <select id="reqFilter">
+              <option value="all">All statuses</option>
+              <option>Pending</option><option>Partially Allocated</option><option>Allocated</option><option>Delivered</option>
+            </select>
+            <button id="autoAllocate">Auto-allocate by priority</button>
+          </div>
+        </div>
+        <div class="table-wrap"><table id="reqTable"></table></div>
+      </div>
+    </section>
+
+    <!-- RESOURCE INVENTORY -->
+    <section id="inventory" class="panel">
+      <div class="box">
+        <h2>Add / restock resource</h2>
+        <form id="invForm" class="form">
+          <label>Resource name <input id="invName" placeholder="e.g. Medicines" required></label>
+          <label>Quantity <input id="invQty" type="number" min="1" required></label>
+          <label>Unit <input id="invUnit" placeholder="litres, kits, packs…" required></label>
+          <button type="submit">Save</button>
+        </form>
+      </div>
+      <div class="box">
+        <h2>Current inventory</h2>
+        <div class="table-wrap"><table id="invTable"></table></div>
+      </div>
+    </section>
+
+    <!-- AFFECTED AREAS -->
+    <section id="areas" class="panel">
+      <div class="box">
+        <h2>Record affected area</h2>
+        <form id="areaForm" class="form">
+          <label>Area / village / district <input id="areaName" required></label>
+          <label>Disaster type
+            <select id="areaType"><option>Flood</option><option>Earthquake</option><option>Cyclone</option><option>Landslide</option><option>Fire</option><option>Other</option></select>
+          </label>
+          <label>Severity
+            <select id="areaSeverity"><option>Severe</option><option>Moderate</option><option>Mild</option></select>
+          </label>
+          <label>People affected <input id="areaPop" type="number" min="0" required></label>
+          <button type="submit">Add area</button>
+        </form>
+      </div>
+      <div class="box">
+        <h2>Affected areas</h2>
+        <div class="table-wrap"><table id="areaTable"></table></div>
+      </div>
+    </section>
+
+    <!-- VOLUNTEERS -->
+    <section id="volunteers" class="panel">
+      <div class="box">
+        <h2>Register volunteer</h2>
+        <form id="volForm" class="form">
+          <label>Name <input id="volName" required></label>
+          <label>Skill
+            <select id="volSkill"><option>Medical</option><option>Logistics</option><option>Rescue</option><option>Food distribution</option><option>Shelter setup</option><option>General</option></select>
+          </label>
+          <label>Phone <input id="volPhone" type="tel" required></label>
+          <button type="submit">Register</button>
+        </form>
+      </div>
+      <div class="box">
+        <h2>Volunteers</h2>
+        <div class="table-wrap"><table id="volTable"></table></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
